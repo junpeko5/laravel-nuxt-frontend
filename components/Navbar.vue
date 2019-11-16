@@ -30,7 +30,7 @@
             <a to="/login" class="nav-link">{{ user.name }}</a>
           </li>
           <li class="nav-item">
-            <nuxt-link to="/logout" class="nav-link">Logout</nuxt-link>
+            <a @click.prevent="logout" class="nav-link">Logout</a>
           </li>
         </ul>
       </template>
@@ -40,6 +40,10 @@
 
 <script>
 export default {
-
+  methods: {
+    logout() {
+      this.$auth.logout()
+    }
+  }
 }
 </script>
