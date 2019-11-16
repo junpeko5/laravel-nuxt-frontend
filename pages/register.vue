@@ -2,20 +2,20 @@
   <div class="container col-md-6 mt-5">
     <h2>Register</h2>
     <br>
-    <form>
+    <form @submit.prevent="submit">
       <div class="form-group">
         <label for="fullname">Full Name</label>
-        <input type="text" class="form-control" placeholder="Enter Full Name">
+        <input v-model.trim="form.name" type="text" class="form-control" placeholder="Enter Full Name" autofocus>
         <small id="emailHelp" class="form-text text-danger">Show errors here</small>
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" placeholder="Enter email">
+        <input v-model.trim="form.email" type="email" class="form-control" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-danger">Show errors here</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" placeholder="Password">
+        <input v-model.trim="form.password" type="password" class="form-control" placeholder="Password">
         <small id="emailHelp" class="form-text text-danger">Show errors here</small>
       </div>
       <div class="form-group form-check">
@@ -25,6 +25,32 @@
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
     <br>
-    <p>Don't have an account? <nuxt-link to="/login">Login</nuxt-link></p>
+    <p>Already have an account? <nuxt-link to="/login">Login</nuxt-link></p>
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: {
+        email: '',
+        name: '',
+        password: '',
+      }
+    }
+  },
+  methods: {
+      async submit() {
+        await this.$axios.$post('api/register', this.form)
+        await this.$auth.loginWith('local', {
+          data: {
+            email: this.form.email,
+            password: this.form.password
+          }
+        })
+        this.$router.push('/')
+      }
+    }
+}
+</script>
