@@ -14,14 +14,26 @@
            <nuxt-link to="/posts" class="nav-link">Posts</nuxt-link>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-           <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
-        </li>
-        <li class="nav-item">
-           <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
-        </li>
-      </ul>
+      <template v-if="!authenticated">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
+          </li>
+          <li class="nav-item">
+            <nuxt-link to="/register" class="nav-link">Register</nuxt-link>
+          </li>
+        </ul>
+      </template>
+      <template v-if="authenticated">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a to="/login" class="nav-link">{{ user.name }}</a>
+          </li>
+          <li class="nav-item">
+            <nuxt-link to="/logout" class="nav-link">Logout</nuxt-link>
+          </li>
+        </ul>
+      </template>
     </div>
   </nav>
 </template>
