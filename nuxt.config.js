@@ -60,8 +60,13 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
+  router: {
+    middleware: ["clearValidationErrors"]
+  },
   plugins: [
-    './plugins/mixins/user.js'
+    './plugins/mixins/user.js',
+    './plugins/axios.js',
+    './plugins/mixins/validation.js',
   ],
   /*
    ** Nuxt.js dev-modules
@@ -75,24 +80,30 @@ export default {
     "@nuxtjs/auth"
   ],
   axios: {
-    baseURL: "http://backend.test:8000/"
+    baseURL: "http://backend.test:8000/api/"
   },
   auth: {
+    redirect: {
+      login: '/login', // 認証が必要なページで未ログインの場合のリダイレクト先を設定する
+      logout: '/login', // ログアウト後のリダイレクト先を設定する
+      callback: false,
+      home: '/' // ログイン後のリダイレクト先を設定する
+    },
     strategies: {
       local: {
         endpoints: {
           login: {
-            url: "api/login",
+            url: "login",
             method: "post",
             propertyName: "meta.token"
           },
           user: {
-            url: "api/user",
+            url: "user",
             method: "get",
             propertyName: "data"
           },
           logout: {
-            url: "api/logout",
+            url: "logout",
             method: "post"
           }
         }
