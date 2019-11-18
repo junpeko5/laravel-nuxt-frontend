@@ -31,6 +31,7 @@
 
 <script>
 export default {
+  middleware: ['guest'],
   data() {
     return {
       form: {
@@ -42,14 +43,13 @@ export default {
   },
   methods: {
       async submit() {
-        await this.$axios.$post('api/register', this.form)
+        await this.$axios.$post('register', this.form)
         await this.$auth.loginWith('local', {
           data: {
             email: this.form.email,
             password: this.form.password
           }
         })
-        this.$router.push('/')
       }
     }
 }

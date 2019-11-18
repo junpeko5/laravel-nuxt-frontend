@@ -87,7 +87,7 @@ export default {
       login: '/login', // 認証が必要なページで未ログインの場合のリダイレクト先を設定する
       logout: '/login', // ログアウト後のリダイレクト先を設定する
       callback: false,
-      home: '/' // ログイン後のリダイレクト先を設定する
+      home: '/profile' // ログイン後のリダイレクト先を設定する
     },
     strategies: {
       local: {
