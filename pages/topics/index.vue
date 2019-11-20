@@ -8,8 +8,9 @@
       <div v-if="authenticated">
         <div v-if="user.id === topic.user.id">
           <nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}">
-            <button class="btn btn-outline-success fas fa-edit 3x float-right"></button>
+            <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
           </nuxt-link>
+          <button @click="deleteTopic(topic.id)" class="btn btn-outline-danger far fa-trash-alt fa-lg float-right"></button>
         </div>
       </div>
       <p class="text-muted">{{topic.created_at}} by {{topic.user.name}}</p>
@@ -50,6 +51,10 @@ export default {
       this.topics = data;
       this.links = links;
       // return this.topics = {...this.topics, ...data}
+    },
+    async deleteTopic(id) {
+      await this.$axios.$delete(`/topics/${id}`);
+      this.$router.push('/');
     }
   }
 }
@@ -60,7 +65,8 @@ export default {
       border-left: 10px solid white;
       padding: 0 10px 0 10px;
   }
-  .btn-outline-success {
+  .btn-outline-success,
+  .btn-outline-danger {
     border: none;
   }
 </style>
