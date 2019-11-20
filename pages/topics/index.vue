@@ -8,7 +8,7 @@
       <div v-if="authenticated">
         <div v-if="user.id === topic.user.id">
           <nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}">
-            <button class="btn btn-outline-success fas fa-edit fas-2x float-right"></button>
+            <button class="btn btn-outline-success fas fa-edit 3x float-right"></button>
           </nuxt-link>
         </div>
       </div>
@@ -59,5 +59,8 @@ export default {
   .content {
       border-left: 10px solid white;
       padding: 0 10px 0 10px;
+  }
+  .btn-outline-success {
+    border: none;
   }
 </style>
