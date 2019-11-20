@@ -9,6 +9,13 @@
         <p class="text-muted">{{content.created_at}} by {{content.user.name}}</p>
       </div>
     </div>
+    <nav>
+      <ul class="pagination justify-content-center">
+        <li v-for="(value, key) in links" :key="key" class="page-item">
+          <a v-if="value" @click="paginate(value)" href="#" class="page-link">{{key}}</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -16,14 +23,24 @@
 export default {
   data() {
     return {
-      topics: []
+      topics: [],
+      links: []
     }
   },
-  async asyncData(context) {
-    let {data} = await context.$axios.$get('/topics')
-    console.log(data)
+  async asyncData({$axios}) {
+    let {data, links} = await $axios.$get('/topics')
+    console.log(links)
     return {
-      topics: data
+      topics: data,
+      links: links
+    }
+  },
+  methods: {
+    async paginate(value) {
+      let {data, links} = await this.$axios.$get(value)
+      this.topics = data;
+      this.links = links;
+      // return this.topics = {...this.topics, ...data}
     }
   }
 }
