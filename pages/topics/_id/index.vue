@@ -4,16 +4,18 @@
       <h2 class="display-3">
         {{topic.title}}
       </h2>
-      <div v-if="authenticated">
-        <div v-if="user.id === topic.user.id">
-          <nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}">
-            <button class="btn btn-outline-success fas fa-edit fas-2x float-right"></button>
-          </nuxt-link>
-        </div>
-      </div>
       <p class="text-muted">{{topic.created_at}} by {{topic.user.name}}</p>
       <div v-for="(content, index) in topic.post" :key="index" class="ml-5 content">
-        {{content.body}}
+        <p>{{content.body}}</p>
+        <div v-if="authenticated">
+          <div v-if="user.id === content.user.id">
+            <nuxt-link :to="{name: 'topics-posts-edit', params: {id: $route.params.id,body: content.id}}">
+              <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
+            </nuxt-link>
+            <button @click="deletePost(content.id)"
+                    class="btn btn-outline-danger far fa-trash-alt fa-lg float-right"></button>
+          </div>
+        </div>
         <p class="text-muted">{{content.created_at}} by {{content.user.name}}</p>
       </div>
     </div>
@@ -59,6 +61,10 @@ export default {
       await this.$axios.post(`/topics/${this.$route.params.id}/posts`, {
         body: this.body
       })
+      this.$router.push('/topics');
+    },
+    async deletePost(id) {
+      await this.$axios.$delete(`/topics/${this.$route.params.id}/posts/${id}`)
       this.$router.push('/topics');
     }
   }
