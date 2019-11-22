@@ -17,6 +17,10 @@
       <div v-for="(content, index) in topic.post" :key="index" class="ml-5 content">
         {{content.body}}
         <p class="text-muted">{{content.created_at}} by {{content.user.name}}</p>
+        <div class="btn btn-outline-primary far fa-thumbs-up fa-lg ml-5 mb-2"
+             @click="likePost(topic.id, content)">
+          <span class="badge">{{content.likes_count}}</span>
+        </div>
       </div>
     </div>
     <nav>
@@ -39,7 +43,6 @@ export default {
   },
   async asyncData({$axios}) {
     let {data, links} = await $axios.$get('/topics')
-    console.log(links)
     return {
       topics: data,
       links: links
@@ -55,6 +58,31 @@ export default {
     async deleteTopic(id) {
       await this.$axios.$delete(`/topics/${id}`);
       this.$router.push('/');
+    },
+    async likePost(topicId, content) {
+      const userFromVuex = this.$store.getters["auth/user"];
+      if (!userFromVuex) {
+        alert('ログインしてください。')
+        this.$router.push('/login')
+        return;
+      }
+      // can't like your own post
+      if (userFromVuex.id === content.user.id) {
+        alert("ご自身の投稿はいいねできません。")
+        return;
+      }
+      // if user have aleady liked
+      if (content.users) {
+        if (content.users.some(user => user.id === userFromVuex.id)) {
+          alert('すでにいいねされています。')
+          return;
+        }
+        await this.$axios.$post(`/topics/${topicId}/posts/${content.id}/likes`);
+        let {data, links} = await this.$axios.$get(`/topics`);
+        this.topics = data;
+        this.links = links;
+      }
+      return;
     }
   }
 }
