@@ -7,7 +7,7 @@
       <p class="text-muted">{{topic.created_at}} by {{topic.user.name}}</p>
       <div v-for="(content, index) in topic.post" :key="index" class="ml-5 content">
         <p>{{content.body}}</p>
-        <div v-if="authenticated">
+        <div v-if="$auth.loggedIn">
           <div v-if="user.id === content.user.id">
             <nuxt-link :to="{name: 'topics-posts-edit', params: {id: $route.params.id,body: content.id}}">
               <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
@@ -19,7 +19,7 @@
         <p class="text-muted">{{content.created_at}} by {{content.user.name}}</p>
       </div>
     </div>
-    <div class="mt-5 ml-5" v-if="authenticated">
+    <div class="mt-5 ml-5" v-if="$auth.loggedIn">
       <form @submit.prevent="create">
         <div class="form-group">
           <label for="">

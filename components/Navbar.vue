@@ -17,7 +17,7 @@
            <nuxt-link to="/dashboard" class="nav-link">Create</nuxt-link>
         </li>
       </ul>
-      <template v-if="!authenticated">
+      <template v-if="!$auth.loggedIn">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
             <nuxt-link to="/login" class="nav-link">Login</nuxt-link>
@@ -27,10 +27,10 @@
           </li>
         </ul>
       </template>
-      <template v-if="authenticated">
+      <template v-if="$auth.loggedIn">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a to="/login" class="nav-link">{{ user.name }}</a>
+            <a to="/login" class="nav-link">{{ $auth.user.name }}</a>
           </li>
           <li class="nav-item">
             <a @click.prevent="logout" class="nav-link">Logout</a>

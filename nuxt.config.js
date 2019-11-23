@@ -71,7 +71,6 @@ export default {
     middleware: ["clearValidationErrors"]
   },
   plugins: [
-    './plugins/mixins/user.js',
     './plugins/axios.js',
     './plugins/mixins/validation.js',
   ],

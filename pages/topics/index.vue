@@ -5,7 +5,7 @@
       <h2>
         <nuxt-link :to="{name: 'topics-id', params: {id: topic.id}}">{{topic.title}}</nuxt-link>
       </h2>
-      <div v-if="authenticated">
+      <div v-if="$auth.loggedIn">
         <div v-if="user.id === topic.user.id">
           <nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}">
             <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
@@ -60,7 +60,7 @@ export default {
       this.$router.push('/');
     },
     async likePost(topicId, content) {
-      const userFromVuex = this.$store.getters["auth/user"];
+      const userFromVuex = this.$auth.user;
       if (!userFromVuex) {
         alert('ログインしてください。')
         this.$router.push('/login')
