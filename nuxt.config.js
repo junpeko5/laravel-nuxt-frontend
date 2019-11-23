@@ -10,7 +10,7 @@ export default {
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       {
-        hid: "description",
+        id: "description",
         name: "description",
         content: process.env.npm_package_description || ""
       }
@@ -86,7 +86,7 @@ export default {
     "@nuxtjs/auth"
   ],
   axios: {
-    baseURL: "http://backend.test:8000/api/"
+    baseURL: process.env.BASE_URL
   },
   auth: {
     redirect: {
