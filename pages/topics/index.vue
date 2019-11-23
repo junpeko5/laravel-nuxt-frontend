@@ -18,7 +18,7 @@
         {{content.body}}
         <p class="text-muted">{{content.created_at}} by {{content.user.name}}</p>
         <div class="btn btn-outline-primary far fa-thumbs-up fa-lg ml-5 mb-2"
-             @click="likePost(topic.id, content)">
+             @click="likeDislikePost(topic.id, content, index)">
           <span class="badge">{{content.likes_count}}</span>
         </div>
       </div>
@@ -42,7 +42,7 @@ export default {
     }
   },
   async asyncData({$axios}) {
-    let {data, links} = await $axios.$get('/topics')
+    let {data, links} = await $axios.$get(`/topics`);
     return {
       topics: data,
       links: links
@@ -51,15 +51,14 @@ export default {
   methods: {
     async paginate(value) {
       let {data, links} = await this.$axios.$get(value)
-      this.topics = data;
-      this.links = links;
+      this.setData(data, links);
       // return this.topics = {...this.topics, ...data}
     },
     async deleteTopic(id) {
       await this.$axios.$delete(`/topics/${id}`);
       this.$router.push('/');
     },
-    async likePost(topicId, content) {
+    async likeDislikePost(topicId, content, index) {
       const userFromVuex = this.$auth.user;
       if (!userFromVuex) {
         alert('ログインしてください。')
@@ -74,15 +73,26 @@ export default {
       // if user have aleady liked
       if (content.users) {
         if (content.users.some(user => user.id === userFromVuex.id)) {
-          alert('すでにいいねされています。')
+          if (confirm('すでにいいねされています。取り消しますか？')) {
+            await this.$axios.$delete(`/topics/${topicId}/posts/${content.id}/likes/${content.likes[index].id}`)
+            let {data, links} = await this.getTopics()
+            this.setData(data, links);
+            return;
+          }
           return;
         }
         await this.$axios.$post(`/topics/${topicId}/posts/${content.id}/likes`);
-        let {data, links} = await this.$axios.$get(`/topics`);
-        this.topics = data;
-        this.links = links;
+        let {data, links} = await this.getTopics()
+        this.setData(data, links);
       }
       return;
+    },
+    getTopics() {
+      return this.$axios.$get(`/topics`);
+    },
+    setData(data, links) {
+      this.topics = data;
+      this.links = links;
     }
   }
 }
