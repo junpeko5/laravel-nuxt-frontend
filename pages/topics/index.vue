@@ -6,7 +6,7 @@
         <nuxt-link :to="{name: 'topics-id', params: {id: topic.id}}">{{topic.title}}</nuxt-link>
       </h2>
       <div v-if="$auth.loggedIn">
-        <div v-if="user.id === topic.user.id">
+        <div v-if="$auth.user.id === topic.user.id">
           <nuxt-link :to="{name: 'topics-edit', params: {id: topic.id}}">
             <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
           </nuxt-link>

@@ -8,7 +8,7 @@
       <div v-for="(content, index) in topic.post" :key="index" class="ml-5 content">
         <p>{{content.body}}</p>
         <div v-if="$auth.loggedIn">
-          <div v-if="user.id === content.user.id">
+          <div v-if="$auth.user.id === content.user.id">
             <nuxt-link :to="{name: 'topics-posts-edit', params: {id: $route.params.id,body: content.id}}">
               <button class="btn btn-outline-success fas fa-edit fa-lg float-right"></button>
             </nuxt-link>
