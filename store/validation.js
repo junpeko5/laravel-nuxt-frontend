@@ -1,16 +1,16 @@
 export const state = () => ({
-  errors: {}
-})
+  serverSideErrors: {}
+});
 
 export const getters = {
   errors(state) {
-    return state.errors
+    return state.serverSideErrors;
   }
 }
 
 export const mutations = {
   SET_VALIDATION_ERRORS(state, errors) {
-    state.errors = errors
+    state.serverSideErrors = errors;
   }
 }
 

@@ -29,9 +29,9 @@
           class="form-control"
           placeholder="write something..."
           v-model="body"></textarea>
-          <small v-if="errors.body"
+          <small v-if="serverSideErrors.body"
                 class="form-text text-danger">
-            {{ errors.body[0] }}
+            {{ serverSideErrors.body[0] }}
           </small>
         </div>
         <button class="btn btn-outline-primary">

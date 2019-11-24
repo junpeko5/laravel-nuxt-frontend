@@ -4,7 +4,7 @@
     <form @submit.prevent="update">
       <div class="form-group mt-5">
         <textarea type="text" class="form-control" v-model="post.body" rows="5"></textarea>
-        <small v-if="errors.body" class="form-text text-danger">{{errors.body[0]}}</small>
+        <small v-if="serverSideErrors.body" class="form-text text-danger">{{serverSideErrors.body[0]}}</small>
       </div>
       <button class="btn btn-outline-success">
         Update

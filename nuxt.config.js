@@ -61,9 +61,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    "assets/styles.css"
-  ],
+  css: ["assets/styles.css"],
   /*
    ** Plugins to load before mounting the App
    */
@@ -71,31 +69,27 @@ export default {
     middleware: ["clearValidationErrors"]
   },
   plugins: [
-    './plugins/axios.js',
-    './plugins/mixins/validation.js',
+    "./plugins/axios.js",
+    "./plugins/mixins/validation.js",
+    "~/plugins/vee-validate"
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    '@nuxtjs/vuetify',
-  ],
+  buildModules: ["@nuxtjs/vuetify"],
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    "@nuxtjs/axios",
-    "@nuxtjs/auth"
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
     baseURL: process.env.BASE_URL
   },
   auth: {
     redirect: {
-      login: '/login', // 認証が必要なページで未ログインの場合のリダイレクト先を設定する
-      logout: '/login', // ログアウト後のリダイレクト先を設定する
+      login: "/login", // 認証が必要なページで未ログインの場合のリダイレクト先を設定する
+      logout: "/login", // ログアウト後のリダイレクト先を設定する
       callback: false,
-      home: '/dashboard' // ログイン後のリダイレクト先を設定する
+      home: "/dashboard" // ログイン後のリダイレクト先を設定する
     },
     strategies: {
       local: {
@@ -125,6 +119,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+    transpile: ["vee-validate/dist/rules"]
   }
 };

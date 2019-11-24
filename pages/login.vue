@@ -6,12 +6,12 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input v-model.trim="form.email" type="email" class="form-control" placeholder="Enter email" autofocus>
-        <small class="form-text text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
+        <small class="form-text text-danger" v-if="serverSideErrors.email">{{ serverSideErrors.email[0] }}</small>
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input v-model.trim="form.password" type="password" class="form-control" placeholder="Password">
-        <small class="form-text text-danger" v-if="errors.password">{{ errors.password[0] }}</small>
+        <small class="form-text text-danger" v-if="serverSideErrors.password">{{ serverSideErrors.password[0] }}</small>
       </div>
       <button type="submit" class="btn btn-primary">Login</button>
     </form>
