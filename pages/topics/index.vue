@@ -24,36 +24,46 @@
       </div>
     </div>
     <nav>
-      <ul class="pagination justify-content-center">
+      <!-- <ul class="pagination justify-content-center">
         <li v-for="(value, key) in links" :key="key" class="page-item">
           <a v-if="value" @click="paginate(value)" href="#" class="page-link">{{key}}</a>
         </li>
-      </ul>
+      </ul> -->
     </nav>
+    <Pagination @updatePagenation="paginate"
+                :length="meta.per_page"
+                :page="meta.current_page"
+    />
   </div>
 </template>
 
 <script>
-
+import Pagination from '@/components/Organisms/Pagination/Pagination'
 
 export default {
+  components: {
+    Pagination
+  },
   data() {
     return {
       topics: [],
-      links: []
+      links: [],
+      meta: [],
     }
   },
   async asyncData({$axios}) {
-    let {data, links} = await $axios.$get(`/topics`);
+    let {data, links, meta} = await $axios.$get(`/topics`);
     return {
       topics: data,
-      links: links
+      links: links,
+      meta: meta
     }
   },
   methods: {
-    async paginate(value) {
-      let {data, links} = await this.$axios.$get(value)
-      this.setData(data, links);
+    async paginate(pageNumber) {
+      console.log(pageNumber)
+      let {data, links, meta} = await this.$axios.$get(`/topics?page=${pageNumber}`)
+      this.setData(data, links, meta);
       // return this.topics = {...this.topics, ...data}
     },
     async deleteTopic(id) {
@@ -92,9 +102,10 @@ export default {
     getTopics() {
       return this.$axios.$get(`/topics`);
     },
-    setData(data, links) {
+    setData(data, links, meta) {
       this.topics = data;
       this.links = links;
+      this.meta = meta;
     }
   }
 }

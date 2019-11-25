@@ -1,7 +1,15 @@
-import { ValidationProvider, extend } from "vee-validate";
-import { required } from "vee-validate/dist/rules";
+import { ValidationProvider, extend, localize } from "vee-validate";
+import { required, max } from "vee-validate/dist/rules";
+import ja from "vee-validate/dist/locale/ja.json";
+
+
 
 extend("required", {
-  ...required,
-  message: "この項目は必須入力です。"
+  ...required
 });
+
+extend("max", {
+  ...max
+});
+
+localize("ja", ja);

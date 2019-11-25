@@ -1,6 +1,7 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-    <AppNavigation />
+  <nav>
+    
+    <!-- <AppNavigation /> -->
     <NavbarList />
   </nav>
 </template>

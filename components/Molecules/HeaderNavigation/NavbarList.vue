@@ -1,36 +1,26 @@
 <template>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <NavbarHomeLink />
-      </li>
-      <li class="nav-item">
-        <NavbarTopicsLink />
-      </li>
-      <li class="nav-item">
-        <NavbarCreateLink />
-      </li>
-    </ul>
-    <template v-if="!$auth.loggedIn">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <NavbarLoginLink />
-        </li>
-        <li class="nav-item">
-          <NavbarRegisterLink />
-        </li>
-      </ul>
-    </template>
-    <template v-if="$auth.loggedIn">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <NavbarUserLink />
-        </li>
-        <li class="nav-item">
-          <NavbarLogoutLink />
-        </li>
-      </ul>
-    </template>
+  <div>
+    <v-toolbar
+      :color="'grey darken-4'"
+      dark
+    >
+      <v-toolbar-title><NavbarHomeLink /></v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-toolbar-items>
+        <v-btn text><NavbarTopicsLink /></v-btn>
+        <v-btn text><NavbarCreateLink /></v-btn>
+        <template v-if="!$auth.loggedIn">
+          <v-btn text><NavbarLoginLink /></v-btn>
+          <v-btn text><NavbarRegisterLink /></v-btn>
+        </template>
+        <template v-if="$auth.loggedIn">
+          <v-btn text><NavbarUserLink /></v-btn>
+          <v-btn text><NavbarLogoutLink /></v-btn>
+        </template>
+      </v-toolbar-items>
+    </v-toolbar>
   </div>
 </template>
 
