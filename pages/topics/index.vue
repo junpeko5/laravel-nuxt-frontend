@@ -23,15 +23,8 @@
         </div>
       </div>
     </div>
-    <nav>
-      <!-- <ul class="pagination justify-content-center">
-        <li v-for="(value, key) in links" :key="key" class="page-item">
-          <a v-if="value" @click="paginate(value)" href="#" class="page-link">{{key}}</a>
-        </li>
-      </ul> -->
-    </nav>
     <Pagination @updatePagenation="paginate"
-                :length="meta.per_page"
+                :length="meta.last_page"
                 :page="meta.current_page"
     />
   </div>
@@ -47,23 +40,21 @@ export default {
   data() {
     return {
       topics: [],
-      links: [],
       meta: [],
     }
   },
   async asyncData({$axios}) {
-    let {data, links, meta} = await $axios.$get(`/topics`);
+    let {data, meta} = await $axios.$get(`/topics`);
     return {
       topics: data,
-      links: links,
       meta: meta
     }
   },
   methods: {
     async paginate(pageNumber) {
       console.log(pageNumber)
-      let {data, links, meta} = await this.$axios.$get(`/topics?page=${pageNumber}`)
-      this.setData(data, links, meta);
+      let {data, meta} = await this.$axios.$get(`/topics?page=${pageNumber}`)
+      this.setData(data, meta);
       // return this.topics = {...this.topics, ...data}
     },
     async deleteTopic(id) {
@@ -87,24 +78,23 @@ export default {
         if (content.users.some(user => user.id === userFromVuex.id)) {
           if (confirm('すでにいいねされています。取り消しますか？')) {
             await this.$axios.$delete(`/topics/${topicId}/posts/${content.id}/likes/${content.likes[index].id}`)
-            let {data, links} = await this.getTopics()
-            this.setData(data, links);
+            let {data, meta} = await this.getTopics()
+            this.setData(data, meta);
             return;
           }
           return;
         }
         await this.$axios.$post(`/topics/${topicId}/posts/${content.id}/likes`);
-        let {data, links} = await this.getTopics()
-        this.setData(data, links);
+        let {data, meta} = await this.getTopics()
+        this.setData(data, meta);
       }
       return;
     },
     getTopics() {
       return this.$axios.$get(`/topics`);
     },
-    setData(data, links, meta) {
+    setData(data, meta) {
       this.topics = data;
-      this.links = links;
       this.meta = meta;
     }
   }
