@@ -1,7 +1,8 @@
-const Vuex = require("vuex");
-const validation = require("../../store/validation");
-const { createLocalVue } = require("@vue/test-utils");
-const cloneDeep = require("lodash.clonedeep");
+import Vuex from "vuex";
+import validation from "../../store/validation";
+import { createLocalVue } from "@vue/test-utils";
+import cloneDeep from "lodash.clonedeep";
+import "regenerator-runtime";
 
 const localVue = createLocalVue();
 localVue.use(Vuex);

@@ -120,6 +120,21 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-    transpile: ["vee-validate/dist/rules"]
+    transpile: ["vee-validate/dist/rules"],
+    babel: {
+      // envName: server, client, modern
+      presets({ envName }) {
+        return [
+          [
+            "@nuxt/babel-preset-app",
+            {
+              useBuiltIns: "usage",
+              corejs: { version: 3 },
+              debug: true
+            }
+          ]
+        ];
+      }
+    }
   }
 };
