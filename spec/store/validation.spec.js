@@ -24,5 +24,14 @@ describe("store/validation.js", () => {
       await store.commit("SET_VALIDATION_ERRORS", errors);
       expect(store.getters["errors"]).toEqual(errors);
     });
-  })
+  }),
+  describe("actions", () => {
+    test("setErrors アクションを dispatch するたびに、SET_VALIDATION_ERRORS ミューテーションがコミットされる", async () => {
+      expect(store.getters["errors"]).toEqual({});
+      await store.dispatch("setErrors", errors);
+      expect(store.getters["errors"]).toEqual(errors);
+      await store.dispatch("clearErrors");
+      expect(store.getters["errors"]).toEqual({});
+    });
+  });
 })
