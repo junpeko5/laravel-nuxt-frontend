@@ -52,7 +52,6 @@ export default {
   },
   methods: {
     async paginate(pageNumber) {
-      console.log(pageNumber)
       let {data, meta} = await this.$axios.$get(`/topics?page=${pageNumber}`)
       this.setData(data, meta);
       // return this.topics = {...this.topics, ...data}

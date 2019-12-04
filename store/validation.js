@@ -1,20 +1,20 @@
-export const state = () => ({
+const state = () => ({
   serverSideErrors: {}
 });
 
-export const getters = {
+const getters = {
   errors(state) {
     return state.serverSideErrors;
   }
 }
 
-export const mutations = {
+const mutations = {
   SET_VALIDATION_ERRORS(state, errors) {
     state.serverSideErrors = errors;
   }
 }
 
-export const actions = {
+const actions = {
   setErrors({ commit }, errors) {
     commit("SET_VALIDATION_ERRORS", errors)
   },
@@ -22,3 +22,10 @@ export const actions = {
     commit("SET_VALIDATION_ERRORS", {})
   }
 }
+
+module.exports = {
+  state,
+  getters,
+  mutations,
+  actions
+};
