@@ -1,7 +1,9 @@
 import "regenerator-runtime";
 
 describe("E2Eテスト", () => {
+  let page;
   beforeAll(async () => {
+    page = await global.__BROWSER__.newPage();
     await page.goto('http://localhost:3000')
   });
 
