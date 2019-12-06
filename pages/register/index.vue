@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <h2>ログイン</h2>
+      <h2>新規アカウント登録</h2>
       <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes, validate }">
         <v-form @submit.prevent="passes(register)">
           <v-row>
