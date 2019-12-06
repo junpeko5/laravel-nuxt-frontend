@@ -1,5 +1,5 @@
-export default function({redirect, $auth}) {
+export default function({ redirect, $auth }) {
   if ($auth.loggedIn) {
-    return redirect('/dashboard')
+    return redirect("/dashboard");
   }
 }

@@ -1,7 +1,7 @@
 import Vuex from "vuex";
-import validation from "../../store/validation";
 import { createLocalVue } from "@vue/test-utils";
 import cloneDeep from "lodash.clonedeep";
+import validation from "../../store/validation";
 import "regenerator-runtime";
 
 const localVue = createLocalVue();
@@ -19,20 +19,20 @@ describe("store/validation.js", () => {
     store = new Vuex.Store(cloneDeep(validation));
   });
 
-  describe('mutations', () => {
+  describe("mutations", () => {
     test("SET_VALIDATION_ERRORS ミューテーションがコミットされると、エラーメッセージがセットされる", async () => {
-      expect(store.getters["errors"]).toEqual({});
+      expect(store.getters.errors).toEqual({});
       await store.commit("SET_VALIDATION_ERRORS", errors);
-      expect(store.getters["errors"]).toEqual(errors);
+      expect(store.getters.errors).toEqual(errors);
     });
   }),
-  describe("actions", () => {
-    test("setErrors アクションを dispatch するたびに、SET_VALIDATION_ERRORS ミューテーションがコミットされる", async () => {
-      expect(store.getters["errors"]).toEqual({});
-      await store.dispatch("setErrors", errors);
-      expect(store.getters["errors"]).toEqual(errors);
-      await store.dispatch("clearErrors");
-      expect(store.getters["errors"]).toEqual({});
+    describe("actions", () => {
+      test("setErrors アクションを dispatch するたびに、SET_VALIDATION_ERRORS ミューテーションがコミットされる", async () => {
+        expect(store.getters.errors).toEqual({});
+        await store.dispatch("setErrors", errors);
+        expect(store.getters.errors).toEqual(errors);
+        await store.dispatch("clearErrors");
+        expect(store.getters.errors).toEqual({});
+      });
     });
-  });
-})
+});

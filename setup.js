@@ -2,7 +2,7 @@ import puppeteer from "puppeteer";
 import mkdirp from "mkdirp";
 import path from "path";
 import fs from "fs";
-import os from "os"
+import os from "os";
 import "regenerator-runtime";
 
 const DIR = path.join(os.tmpdir(), "jest_puppeteer_global_setup");

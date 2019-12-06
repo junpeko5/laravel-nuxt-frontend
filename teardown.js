@@ -9,4 +9,4 @@ export default async function() {
 
   // clean-up the wsEndpoint file
   rimraf.sync(DIR);
-};
+}
