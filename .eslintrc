@@ -4,7 +4,15 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
-    "no-shadow": "off",
+    "no-shadow": [
+      "error",
+      {
+        "allow": [
+          "state",
+          "Vue"
+        ]
+      }
+    ],
     "no-underscore-dangle": [
       "error",
       {
