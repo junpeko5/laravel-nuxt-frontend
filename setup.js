@@ -1,4 +1,5 @@
 import puppeteer from "puppeteer";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import mkdirp from "mkdirp";
 import path from "path";
 import fs from "fs";

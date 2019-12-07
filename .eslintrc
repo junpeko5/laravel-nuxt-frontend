@@ -2,5 +2,41 @@
   "extends": [
     "airbnb-base",
     "plugin:prettier/recommended"
-  ]
+  ],
+  "rules": {
+    "no-shadow": "off",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "__BROWSER__",
+          "__BROWSER_GLOBAL__"
+        ]
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "setup.js",
+          "puppeteer_environment.js",
+          "teardown.js",
+          "**/*.spec.js"
+        ]
+      }
+    ]
+  },
+  "globals": {
+    "describe": false,
+    "beforeEach": false,
+    "beforeAll": false,
+    "afterAll": false,
+    "expect": false,
+    "it": false,
+    "page": false,
+    "test": false
+  },
+  "settings": {
+    "import/core-modules": ["vue", "vuex"]
+  }
 }

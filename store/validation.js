@@ -10,6 +10,7 @@ const getters = {
 
 const mutations = {
   SET_VALIDATION_ERRORS(state, errors) {
+    // eslint-disable-next-line no-param-reassign
     state.serverSideErrors = errors;
   }
 };

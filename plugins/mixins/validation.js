@@ -2,7 +2,7 @@ import Vue from "vue";
 import { mapGetters } from "vuex";
 
 const Validation = {
-  install(Vue, options) {
+  install(Vue) {
     Vue.mixin({
       computed: {
         ...mapGetters({

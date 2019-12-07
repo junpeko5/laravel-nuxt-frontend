@@ -1,4 +1,5 @@
 import os from "os";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import rimraf from "rimraf";
 import path from "path";
 

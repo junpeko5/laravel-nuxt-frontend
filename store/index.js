@@ -8,7 +8,8 @@ const getters = {
 
 const mutations = {
   increment(state) {
-    state.count++;
+    // eslint-disable-next-line no-param-reassign
+    state.count += 1;
   }
 };
 
