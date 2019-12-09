@@ -1,5 +1,9 @@
 <template v-if="$auth.loggedIn">
-  <a @click.prevent="logout" class="nav-link logout-link">Logout</a>
+  <a
+    @click.prevent="logout"
+    class="nav-link logout-link"
+    data-test="logoutLink"
+  >ログアウト</a>
 </template>
 
 <script>

@@ -26,13 +26,15 @@
       "error",
       {
         "devDependencies": [
-          "setup.js",
-          "puppeteer_environment.js",
-          "teardown.js",
-          "**/*.spec.js"
+          "**/*.spec.js",
+          "global-setup.js",
+          "global-teardown.js"
         ]
       }
     ]
+  },
+  "env": {
+    "jest": true
   },
   "globals": {
     "describe": false,
@@ -42,7 +44,10 @@
     "expect": false,
     "it": false,
     "page": false,
-    "test": false
+    "test": false,
+    "browser": false,
+    "context": false,
+    "jestPuppeteer": false
   },
   "settings": {
     "import/core-modules": ["vue", "vuex"]

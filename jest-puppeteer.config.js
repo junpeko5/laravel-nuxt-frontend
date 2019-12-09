@@ -1,5 +1,7 @@
 module.exports = {
   launch: {
-    headless: false
+    // デバッグ時はコメントアウト
+    // slowMo: 100,
+    // headless: false
   }
 };

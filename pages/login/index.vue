@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <h2>ログイン</h2>
+      <h2 data-test="pageTitle">ログイン</h2>
       <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes, validate }">
         <v-form @submit.prevent="passes(login)">
           <v-row>
@@ -19,6 +19,7 @@
                   :success="valid"
                   autofocus
                   clearable
+                  data-test="emailInput"
                 ></v-text-field>
                 <small v-if="serverSideErrors.email" class="form-text text-danger">
                   {{serverSideErrors.email[0]}}
@@ -41,6 +42,7 @@
                   :error-messages="errors"
                   :success="valid"
                   clearable
+                  data-test="passwordInput"
                 ></v-text-field>
                 <small v-if="serverSideErrors.password" class="form-text text-danger">
                   {{serverSideErrors.password[0]}}
@@ -55,6 +57,7 @@
                 dark
                 type="submit"
                 :disabled="invalid"
+                data-test="loginButton"
               >ログイン</v-btn>
             </v-col>
           </v-row>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container>
-      <h2>トピック投稿</h2>
+      <h2 data-test="pageTitle">トピック投稿</h2>
       <hr>
       <ValidationObserver ref="obs" v-slot="{ invalid, validated, passes, validate }">
         <v-form @submit.prevent="passes(create)">
@@ -20,6 +20,7 @@
                   :success="valid"
                   autofocus
                   clearable
+                  data-test="titleInput"
                 ></v-text-field>
                 <small class="form-text text-danger" v-if="serverSideErrors.title">{{ serverSideErrors.title[0] }}</small>
               </ValidationProvider>
@@ -40,6 +41,7 @@
                   :success="valid"
                   hint="投稿本文を入力"
                   clearable
+                  data-test="bodyInput"
                 ></v-textarea>
                 <small class="form-text text-danger" v-if="serverSideErrors.body">{{ serverSideErrors.body[0] }}</small>
               </ValidationProvider>
@@ -52,6 +54,7 @@
                 dark
                 type="submit"
                 :disabled="invalid"
+                data-test="createButton"
               >作成</v-btn>
             </v-col>
           </v-row>
@@ -91,7 +94,7 @@ export default {
         this.$router.push('/dashboard');
         return;
       }
-       this.$router.push('/')
+       this.$router.push('/topics');
     }
   }
 }

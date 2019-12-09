@@ -1,6 +1,7 @@
 module.exports = {
   preset: "jest-puppeteer",
-  globalSetup: "./setup.js",
-  globalTeardown: "./teardown.js",
-  testEnvironment: "./puppeteer_environment.js"
+  setupFilesAfterEnv: ["./setup.js"],
+  testEnvironment: "./custom-environment.js",
+  globalSetup: "./global-setup.js",
+  globalTeardown: "./global-teardown.js"
 };

@@ -1,0 +1,16 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+const PuppeteerEnvironment = require("jest-environment-puppeteer");
+
+class CustomEnvironment extends PuppeteerEnvironment {
+  async setup() {
+    await super.setup();
+    // Your setup
+  }
+
+  async teardown() {
+    // Your teardown
+    await super.teardown();
+  }
+}
+
+module.exports = CustomEnvironment;

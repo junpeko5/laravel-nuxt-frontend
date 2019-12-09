@@ -1,9 +1,14 @@
 <template>
   <div class="container">
-    <h2>Latest Topics</h2>
+    <h2 data-test="pageTitle">Latest Topics</h2>
     <div v-for="(topic, index) in topics" :key="index" class="bg-light mt-5 mb-5" style="padding: 20px;">
       <h2>
-        <nuxt-link :to="{name: 'topics-id', params: {id: topic.id}}">{{topic.title}}</nuxt-link>
+        <nuxt-link
+          :to="{name: 'topics-id', params: {id: topic.id}}"
+          data-test="topicTitle"
+        >
+          {{topic.title}}
+        </nuxt-link>
       </h2>
       <div v-if="$auth.loggedIn">
         <div v-if="$auth.user.id === topic.user.id">
