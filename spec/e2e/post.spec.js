@@ -1,6 +1,6 @@
 import "regenerator-runtime";
 
-const timeout = 50000;
+const timeout = 5000;
 
 describe("E2Eテスト", () => {
   let page;
