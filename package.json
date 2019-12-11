@@ -10,7 +10,8 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest spec/unit/**/*.ts",
+    "test:all": "jest"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.4",

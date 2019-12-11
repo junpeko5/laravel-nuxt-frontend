@@ -1,13 +1,13 @@
 import "regenerator-runtime";
 
-const timeout = 500;
+const timeout = 5000;
 
 describe("E2Eテスト", () => {
   let page;
   const sel = id => `[data-test="${id}"]`;
 
   beforeAll(async () => {
-    page = await browser.newPage();
+    page = await global.__BROWSER__.newPage();
     await page.goto("http://localhost:3000/login", {
       waitUntil: ["load", "networkidle2"]
     });
@@ -20,7 +20,6 @@ describe("E2Eテスト", () => {
   it(
     "ログイン処理の確認",
     async () => {
-      await page.waitFor(3000);
       await page.waitForSelector(sel("emailInput"), { visible: true });
       await page.waitForSelector(sel("passwordInput"), { visible: true });
       await page.type(sel("emailInput"), "junpeko@example.com");

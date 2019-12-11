@@ -1,7 +1,7 @@
 import Vuex from "vuex";
 import { createLocalVue } from "@vue/test-utils";
 import cloneDeep from "lodash.clonedeep";
-import validation from "../../store/validation";
+import validation from "../../../store/validation";
 import "regenerator-runtime";
 
 const localVue = createLocalVue();

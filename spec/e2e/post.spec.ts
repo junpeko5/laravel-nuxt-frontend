@@ -7,7 +7,7 @@ describe("E2Eテスト", () => {
   const sel = id => `[data-test="${id}"]`;
 
   beforeAll(async () => {
-    page = await browser.newPage();
+    page = await global.__BROWSER__.newPage();
     await page.goto("http://localhost:3000/login", {
       waitUntil: ["load", "networkidle2"]
     });
