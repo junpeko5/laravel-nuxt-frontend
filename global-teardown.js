@@ -1,12 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import chalk from "chalk";
+const os = require("os");
+const rimraf = require("rimraf");
+const path = require("path");
 
-const { teardown: teardownPuppeteer } = require("jest-environment-puppeteer");
+const DIR = path.join(os.tmpdir(), "jest_puppeteer_global_setup");
+module.exports = async function() {
+  // close the browser instance
+  await global.__BROWSER_GLOBAL__.close();
 
-module.exports = async function globalTeardown(globalConfig) {
-  // Your global teardown
-  await teardownPuppeteer(globalConfig)
-
-  // eslint-disable-next-line no-console
-  console.log(chalk.green("Teardown Puppeteer"));
-}
+  // clean-up the wsEndpoint file
+  rimraf.sync(DIR);
+};

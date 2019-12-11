@@ -1,12 +1,19 @@
 import "regenerator-runtime";
-// eslint-disable-next-line import/no-extraneous-dependencies
-import chalk from "chalk";
+const puppeteer = require("puppeteer");
+const mkdirp = require("mkdirp");
+const path = require("path");
+const fs = require("fs");
+const os = require("os");
 
-const { setup: setupPuppeteer } = require("jest-environment-puppeteer");
+const DIR = path.join(os.tmpdir(), "jest_puppeteer_global_setup");
 
-module.exports = async function globalSetup(globalConfig) {
-  await setupPuppeteer(globalConfig);
-  // Your global setup
-  // eslint-disable-next-line no-console
-  console.log(chalk.green("Setup Puppeteer"));
+module.exports = async function() {
+  const browser = await puppeteer.launch({ headless: false, slowMo: 250 });
+  // store the browser instance so we can teardown it later
+  // this global is only available in the teardown but not in TestEnvironments
+  global.__BROWSER_GLOBAL__ = browser;
+
+  // use the file system to expose the wsEndpoint for TestEnvironments
+  mkdirp.sync(DIR);
+  fs.writeFileSync(path.join(DIR, "wsEndpoint"), browser.wsEndpoint());
 };
